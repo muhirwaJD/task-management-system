@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Task Manager - View Tasks</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        font-family: sans-serif;
+        padding: 20px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+      th,
+      td {
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+    </style>
+  </head>
+  <body>
+    <nav style="margin-bottom: 20px">
+      <a href="index.html">📋 View Tasks</a> |
+      <a href="create.html">📝 Create Task</a> |
+      <a href="update.html">🔄 Update Task</a>
+      <a href="delete.html">🗑️ Delete Task</a>
+    </nav>
+
+    <h1>📋 All Tasks</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Task ID</th>
+          <th>Title</th>
+          <th>Assignee</th>
+          <th>Status</th>
+          <th>Deadline</th>
+        </tr>
+      </thead>
+      <tbody id="taskList">
+        <!-- Tasks will be inserted here -->
+      </tbody>
+    </table>
+
+    <script>
+      // Replace with your real API URL
+      const API_URL =
+        "https://qv18xu24cg.execute-api.eu-central-1.amazonaws.com/dev/getTasks";
+
+      fetch(API_URL)
+        .then((response) => response.json())
+        .then((tasks) => {
+          const table = document.getElementById("taskList");
+          tasks.forEach((task) => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+            <td>${task.taskId}</td>
+            <td>${task.title}</td>
+            <td>${task.assignee}</td>
+            <td>${task.status}</td>
+            <td>${task.deadline}</td>
+          `;
+            table.appendChild(row);
+          });
+        })
+        .catch((error) => {
+          console.error("Error fetching tasks:", error);
+        });
+    </script>
+  </body>
+</html>

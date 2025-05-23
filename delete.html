@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Delete Task - Task Manager</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        font-family: sans-serif;
+        padding: 30px;
+        max-width: 600px;
+        margin: auto;
+      }
+      label {
+        display: block;
+        margin-top: 15px;
+        font-weight: bold;
+      }
+      input,
+      button {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+      }
+      button {
+        background-color: #dc3545;
+        color: white;
+        border: none;
+        margin-top: 20px;
+        cursor: pointer;
+      }
+      .success {
+        color: green;
+        margin-top: 15px;
+      }
+      .error {
+        color: red;
+        margin-top: 15px;
+      }
+      nav {
+        margin-bottom: 20px;
+      }
+      nav a {
+        margin-right: 15px;
+        text-decoration: none;
+        color: #007bff;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="index.html">📋 View Tasks</a>
+      <a href="create.html">📝 Create Task</a>
+      <a href="update.html">🔄 Update Task</a>
+      <a href="delete.html">🗑️ Delete Task</a>
+    </nav>
+
+    <h1>🗑️ Delete a Task</h1>
+
+    <form id="deleteForm">
+      <label for="taskId">Task ID</label>
+      <input type="text" id="taskId" required />
+
+      <button type="submit">Delete Task</button>
+    </form>
+
+    <div id="responseMessage"></div>
+
+    <script>
+      const API_URL =
+        "https://iozmejez1i.execute-api.eu-central-1.amazonaws.com/dev/delete";
+      document
+        .getElementById("deleteForm")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const taskId = document.getElementById("taskId").value;
+
+          try {
+            const response = await fetch(API_URL, {
+              method: "DELETE",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ taskId }),
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+              document.getElementById(
+                "responseMessage"
+              ).innerHTML = `<p class="success">✅ ${result.message}</p>`;
+            } else {
+              document.getElementById(
+                "responseMessage"
+              ).innerHTML = `<p class="error">❌ ${
+                result.error || "An error occurred"
+              }</p>`;
+            }
+          } catch (error) {
+            document.getElementById(
+              "responseMessage"
+            ).innerHTML = `<p class="error">❌ Error: ${error.message}</p>`;
+          }
+        });
+    </script>
+  </body>
+</html>

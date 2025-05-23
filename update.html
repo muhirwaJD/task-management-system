@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Update Task Status</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        font-family: sans-serif;
+        padding: 30px;
+        max-width: 600px;
+        margin: auto;
+      }
+      label {
+        display: block;
+        margin-top: 15px;
+        font-weight: bold;
+      }
+      input,
+      select,
+      button {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+      }
+      button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        margin-top: 20px;
+        cursor: pointer;
+      }
+      .success {
+        color: green;
+        margin-top: 15px;
+      }
+      .error {
+        color: red;
+        margin-top: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav style="margin-bottom: 20px">
+      <a href="index.html">📋 View Tasks</a> |
+      <a href="create.html">📝 Create Task</a> |
+      <a href="update.html">🔄 Update Task</a>
+      <a href="delete.html">🗑️ Delete Task</a>
+    </nav>
+
+    <h1>🔄 Update Task Status</h1>
+
+    <form id="updateForm">
+      <label for="taskId">Task ID</label>
+      <input type="text" id="taskId" required />
+
+      <label for="status">New Status</label>
+      <select id="status" required>
+        <option value="">Select status</option>
+        <option value="Pending">Pending</option>
+        <option value="InProgress">InProgress</option>
+        <option value="Done">Done</option>
+      </select>
+
+      <button type="submit">Update Task</button>
+    </form>
+
+    <div id="responseMessage"></div>
+
+    <script>
+      const API_URL =
+        "https://5bygtvgcvc.execute-api.eu-central-1.amazonaws.com/dev/update-task";
+      document
+        .getElementById("updateForm")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const taskId = document.getElementById("taskId").value;
+          const status = document.getElementById("status").value;
+
+          const payload = {
+            taskId: taskId,
+            status: status,
+          };
+
+          try {
+            const response = await fetch(API_URL, {
+              method: "PUT",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(payload),
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+              document.getElementById(
+                "responseMessage"
+              ).innerHTML = `<p class="success">✅ Task updated successfully!</p>`;
+            } else {
+              document.getElementById(
+                "responseMessage"
+              ).innerHTML = `<p class="error">❌ Error: ${
+                result.error || "Something went wrong"
+              }</p>`;
+            }
+          } catch (error) {
+            document.getElementById(
+              "responseMessage"
+            ).innerHTML = `<p class="error">❌ Error: ${error.message}</p>`;
+          }
+        });
+    </script>
+  </body>
+</html>
