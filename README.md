@@ -26,7 +26,6 @@ A fully functional task management system built with a serverless architecture u
 | Frontend  | HTML, JavaScript (Vanilla), Hosted on S3 |
 | Backend   | AWS Lambda, API Gateway |
 | Database  | Amazon DynamoDB |
-| Auth (Optional) | Amazon Cognito |
 | Infra     | Fully Serverless & Free Tier Safe |
 
 ---
@@ -48,13 +47,12 @@ README.md        → You're reading it
 ## 🌍 Live Link (Hosted on S3)
 
 👉 [Visit the Live App](http://task-app-muhirwa123.s3-website.eu-central-1.amazonaws.com )  
-*(Replace this with your actual S3 website URL)*
 
 ---
 
 ## 🧑‍💻 Developed By
 
-**Jean de Dieu Muhirwa Harerimana**
+**Muhirwa JD Harerimana**
 
 Student | AWS & DevOps Enthusiast 
 
@@ -73,7 +71,6 @@ Student | AWS & DevOps Enthusiast
 
 ✅ Fully completed  
 ✅ Free Tier safe  
-✅ CORS tested & working
 
 ---
 
