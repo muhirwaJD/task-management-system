@@ -47,17 +47,16 @@ README.md        → You're reading it
 
 ## 🌍 Live Link (Hosted on S3)
 
-👉 [Visit the Live App](http://your-s3-site-url/index.html)  
+👉 [Visit the Live App](http://task-app-muhirwa123.s3-website.eu-central-1.amazonaws.com )  
 *(Replace this with your actual S3 website URL)*
 
 ---
 
 ## 🧑‍💻 Developed By
 
-**[Your Name Here]**
+**Jean de Dieu Muhirwa Harerimana**
 
-Student | AWS & DevOps Enthusiast  
-Eastern College, Moncton
+Student | AWS & DevOps Enthusiast 
 
 ---
 
@@ -81,10 +80,7 @@ Eastern College, Moncton
 ## 📝 License
 
 This project is part of a learning assignment and is not intended for commercial use.
-```
 
 ---
-
-### ✅ Next Step:
 
 
